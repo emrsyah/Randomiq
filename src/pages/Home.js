@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
 function Home() {
@@ -6,6 +7,7 @@ function Home() {
     <div>
       <Navbar />
       Halo
+      <Footer />
     </div>
   )
 }
