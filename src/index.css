@@ -7,3 +7,9 @@ body{
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+  .navlink{
+    @apply opacity-70 hover:opacity-100 hover:font-medium;
+  }
+}

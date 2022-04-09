@@ -21,7 +21,7 @@ function Navbar() {
       <div className="flex gap-10 items-center">
         <a
           href="/"
-          className={`opacity-70 hover:opacity-100 hover:font-medium ${
+          className={`navlink ${
             location.pathname === "/" && "font-medium opacity-100"
           } `}
         >
@@ -29,7 +29,7 @@ function Navbar() {
         </a>
         <a
           href="/"
-          className={`opacity-70 hover:opacity-100 hover:font-medium ${
+          className={`navlink ${
             location.pathname === "/challenges" && "font-medium opacity-100"
           } `}
         >
@@ -37,7 +37,7 @@ function Navbar() {
         </a>
         <a
           href="/"
-          className={`opacity-70 hover:opacity-100 hover:font-medium ${
+          className={`navlink ${
             location.pathname === "/explore" && "font-medium opacity-100"
           } `}
         >
