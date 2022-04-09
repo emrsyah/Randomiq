@@ -13,11 +13,14 @@ function App() {
   if(isLoading) return <div>Loading...</div>
 
   return (
-    <>
-      <LoginButton />
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      {/* <LoginButton />
       <LogoutButton />
-      <Profile />
-    </>
+      <Profile /> */}
+    </Routes>
+    </BrowserRouter>
   );
 }
 
