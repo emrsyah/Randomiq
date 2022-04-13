@@ -1,26 +1,46 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Icon } from "@iconify/react";
+import { useRecoilValue } from "recoil";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 import FilterContainer from "../components/FilterContainer";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import transformAttribute from "../helpers/transformAttribute";
-import { useRecoilValue } from "recoil";
 import { accessState, participantState, priceState, typeState } from "../atoms/filterAtom";
 
 function Home() {
+  const {isAuthenticated, loginWithRedirect} = useAuth0()
   const [randomAct, setRandomAct] = useState();
-  // TODO nanti ada loading pake modal, paling waktu loading sekarang mah disable button aja
-  // const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const typeValue = useRecoilValue(typeState)
   const priceValue = useRecoilValue(priceState)
   const participantValue = useRecoilValue(participantState)
   const accessValue = useRecoilValue(accessState)
+
+  const addChallengesToast = ({ closeToast, toastProps }) => (
+    <div>
+      Challenges Added {' '}
+      <a href="/challenges" className="text-[#FFC300] font-medium hover:font-semibold underline">Here</a>
+    </div>
+  )
+
   useEffect(() => {
     getRandomActivity();
   }, []);
 
+  const addChallenges = () => {
+    if(!isAuthenticated){
+      loginWithRedirect()
+    }
+    toast.success(addChallengesToast)
+  }
+
   const getRandomActivity = () => {
+    setLoading(true)
     axios
       .get("http://www.boredapi.com/api/activity",{
         params:{
@@ -38,7 +58,10 @@ function Home() {
       })
       .catch(function (error) {
         console.log(error);
-      });
+      })
+      .then(function(){
+        setLoading(false)
+      })
   };
 
   return (
@@ -64,12 +87,15 @@ function Home() {
         </div>
       </div>
       <div className="flex items-center mx-16 gap-4">
-        <button className="text-xl font-medium py-4 px-8 border-2 border-[#FFC300] rounded-lg bg-white hover:bg-yellow-100">
+        <button className="text-xl font-medium py-4 px-8 border-2 border-[#FFC300] rounded-lg bg-white hover:bg-yellow-100"
+          onClick={addChallenges}
+          disabled={loading}
+        >
           Accept Challenge
         </button>
-        <div className="text-white p-4 bg-[#FFC300] rounded-lg hover:bg-yellow-500 cursor-pointer" onClick={getRandomActivity}>
+        <button className="text-white p-4 bg-[#FFC300] rounded-lg hover:bg-yellow-500 cursor-pointer" onClick={getRandomActivity} disabled={loading}>
           <Icon icon="ic:round-restart-alt" width="36" />
-        </div>
+        </button>
       </div>
       <Footer />
     </div>

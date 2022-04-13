@@ -28,7 +28,7 @@ function Navbar() {
           randomize
         </a>
         <a
-          href="/"
+          href="/challenges"
           className={`navlink ${
             location.pathname === "/challenges" && "font-medium opacity-100"
           } `}
