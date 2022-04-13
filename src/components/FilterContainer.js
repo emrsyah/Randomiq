@@ -1,48 +1,17 @@
 import React, { useState } from "react";
+import { atom, useRecoilState } from "recoil";
+import { accessData, accessState, participantData, participantState, priceData, priceState, typeData, typeState } from "../atoms/filterAtom";
 import Filter from "./Filter";
 
 
 // TODO Tambahin value di tiap datanya kek param buat fetch api nya nanti
-const typeData = [
-  { id: 1, name: "All" },
-  { id: 2, name: "Education" },
-  { id: 3, name: "Recreational" },
-  { id: 4, name: "Social" },
-  { id: 5, name: "DIY" },
-  { id: 6, name: "Charity" },
-  { id: 7, name: "Cooking" },
-  { id: 8, name: "Relaxation" },
-  { id: 9, name: "Music" },
-  { id: 10, name: "Busywork" },
-];
 
-const priceData = [
-  { id: 1, name: "All" },
-  { id: 2, name: "Free" },
-  { id: 3, name: "Low" },
-  { id: 4, name: "Medium" },
-  { id: 5, name: "High" },
-];
-
-const participantData = [
-  { id: 1, name: "All" },
-  { id: 2, name: "Solo" },
-  { id: 3, name: "Duo" },
-  { id: 4, name: "Group" },
-];
-
-const accessData = [
-  { id: 1, name: "All" },
-  { id: 2, name: "Easy" },
-  { id: 3, name: "Medium" },
-  { id: 4, name: "Hard" },
-];
 
 function FilterContainer() {
-  const [selectedType, setSelectedType] = useState(typeData[0]);
-  const [selectedPrice, setSelectedPrice] = useState(priceData[0]);
-  const [selectedParticipant, setSelectedParticipant] = useState(participantData[0]);
-  const [selectedAccess, setSelectedAccess] = useState(accessData[0]);
+  const [selectedType, setSelectedType] = useRecoilState(typeState);
+  const [selectedPrice, setSelectedPrice] = useRecoilState(priceState);
+  const [selectedParticipant, setSelectedParticipant] = useRecoilState(participantState);
+  const [selectedAccess, setSelectedAccess] = useRecoilState(accessState);
 
   const clearFilter = ()=>{
     setSelectedType(typeData[0])

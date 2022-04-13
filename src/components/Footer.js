@@ -3,7 +3,7 @@ import logofooter from '../assets/randomiq-logo-bottom.svg'
 
 function Footer() {
   return (
-    <footer className="bg-black px-16 py-7 flex justify-between items-center">
+    <footer className="bg-black px-16 py-7 flex justify-between items-center mt-24">
         <img src={logofooter} alt="" />
         <div className='flex gap-8'>
             <a href="https://twitter.com/emrsyahh" target="_blank" rel='noreferrer' className='font-semibold text-white'>twitter</a>

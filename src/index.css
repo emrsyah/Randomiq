@@ -3,6 +3,7 @@
 body{
   font-family: Poppins, "sans-serif";
 }
+/*  */
 
 @tailwind base;
 @tailwind components;
@@ -13,3 +14,4 @@ body{
     @apply opacity-70 hover:opacity-100 hover:font-medium;
   }
 }
+
