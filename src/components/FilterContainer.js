@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { atom, useRecoilState } from "recoil";
+import React from "react";
+import { useRecoilState } from "recoil";
 import { accessData, accessState, participantData, participantState, priceData, priceState, typeData, typeState } from "../atoms/filterAtom";
 import Filter from "./Filter";
 
@@ -20,7 +20,7 @@ function FilterContainer() {
     setSelectedAccess(accessData[0])
   }
   return (
-    <div className="flex gap-5 items-center mx-16 my-12">
+    <div className="flex gap-5 items-center mx-16 my-10">
       <Filter selected={selectedType} data={typeData} setter={setSelectedType} name="Type" />
       <Filter selected={selectedPrice} data={priceData} setter={setSelectedPrice} name="Price" />
       <Filter selected={selectedParticipant} data={participantData} setter={setSelectedParticipant} name="Participant" />
