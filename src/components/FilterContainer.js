@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Filter from "./Filter";
 
+
+// TODO Tambahin value di tiap datanya kek param buat fetch api nya nanti
 const typeData = [
   { id: 1, name: "All" },
   { id: 2, name: "Education" },
