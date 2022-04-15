@@ -69,8 +69,12 @@ function Home() {
         },
       })
       .then(function (response) {
-        const transformedData = transformAttribute(response.data);
-        setRandomAct(transformedData);
+        if(response.data.error){
+          toast.error(response.data.error)
+        }else{
+          const transformedData = transformAttribute(response.data);
+          setRandomAct(transformedData);
+        }
       })
       .catch(function (error) {
         console.log(error);
