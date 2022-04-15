@@ -7,9 +7,9 @@ import Challenges from "./pages/Challenges";
 import { ToastContainer } from "react-toastify";
 import loading from "./assets/loading.svg";
 
+
 function App() {
   const { isLoading } = useAuth0();
-
   if (isLoading)
     return (
       <div className="flex justify-center items-center h-[100vh]">

@@ -1,6 +1,7 @@
 import React from "react";
 import { Listbox } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+// import { ChevronDownIcon } from "@heroicons/react/solid";
+import { Icon } from '@iconify/react';
 
 // * Paramnya nanti ada: item list, nama (type, accessible)
 function Filter({ data, setter, name, selected }) {
@@ -13,9 +14,10 @@ function Filter({ data, setter, name, selected }) {
             <span className="text-gray-600 mr-0.5">{name}:</span>{" "}
             {selected.name}
           </div>
-          <ChevronDownIcon className="h-5 w-5 ml-2" />
+          {/* <ChevronDownIcon className="h-5 w-5 ml-2" /> */}
+          <Icon icon="akar-icons:chevron-down" width="12"  className="ml-2"/>
         </Listbox.Button>
-        <Listbox.Options className="z-50 bg-white w-full mt-2 rounded-md flex flex-col text-sm border-[1px] border-gray-300 fixed max-w-max">
+        <Listbox.Options className="z-50 bg-white w-full mt-2 rounded-md flex flex-col text-sm border-[1px] border-gray-300 absolute max-w-max">
           {data.map((d) => (
             <Listbox.Option
               key={d.id}

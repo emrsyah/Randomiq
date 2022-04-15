@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import { useRecoilValue } from "recoil";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 import FilterContainer from "../components/FilterContainer";
 import Footer from "../components/Footer";
@@ -20,7 +20,7 @@ import {
 import { firestoreDb } from "../firebase";
 
 function Home() {
-  const { isAuthenticated, loginWithRedirect, user } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const [randomAct, setRandomAct] = useState();
   const [loading, setLoading] = useState(true);
   const typeValue = useRecoilValue(typeState);
@@ -49,7 +49,16 @@ function Home() {
     if (!isAuthenticated) {
       toast.warn('To save challenges you must logged in first')
     } else {
-      // await addDoc(firestoreDb);
+      const userId = user.sub.substring(user.sub.indexOf("|") + 1);
+      await addDoc(collection(firestoreDb, "challenges"),{
+        userId: userId,
+        activity: randomAct.activity,
+        type: randomAct.type,
+        price: randomAct.price,
+        participants: randomAct.participants,
+        access: randomAct.accessibility,
+        timestamp: serverTimestamp(),
+      });
       toast.success(addChallengesToast);
     }
     setLoading(false);
@@ -108,14 +117,14 @@ function Home() {
       </div>
       <div className="flex items-center mx-16 gap-4">
         <button
-          className="text-xl font-medium py-4 px-8 border-2 border-[#FFC300] rounded-lg bg-white hover:bg-yellow-100"
+          className={`text-xl font-medium py-4 px-8 border-2 border-[#FFC300] rounded-lg bg-white hover:bg-yellow-100 ${loading && "opacity-60"} `}
           onClick={addChallenges}
           disabled={loading}
         >
           Accept Challenge
         </button>
         <button
-          className="text-white p-4 bg-[#FFC300] rounded-lg hover:bg-yellow-500 cursor-pointer"
+          className={`text-white p-4 bg-[#FFC300] rounded-lg hover:bg-yellow-500 cursor-pointer ${loading && "opacity-60"} `}
           onClick={getRandomActivity}
           disabled={loading}
         >

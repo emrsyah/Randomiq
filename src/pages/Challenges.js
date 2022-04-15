@@ -1,12 +1,32 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import waiting from '../assets/waiting.svg'
+import waiting from "../assets/waiting.svg";
+import { useEffect, useState } from "react";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { firestoreDb } from "../firebase";
+import ChallengesCard from "../components/ChallengesCard";
 
 function Challenges() {
-  const { isAuthenticated, isLoading } = useAuth0();
-  //   const id = user.sub.substring(user.sub.indexOf("|") + 1);
-  //   console.log(id);
+  const { isAuthenticated, user } = useAuth0();
+  const [challenges, setChallenges] = useState([]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const userId = user.sub.substring(user.sub.indexOf("|") + 1);
+      const unsubscribe = onSnapshot(
+        query(
+          collection(firestoreDb, "challenges"),
+          where("userId", "==", userId)
+        ),
+        (snapshot) => {
+          setChallenges(snapshot.docs);
+        }
+      );
+      return unsubscribe;
+    }
+  }, []);
+
   if (!isAuthenticated) {
     return (
       <div className="h-[100vh] flex flex-col justify-between ">
@@ -20,11 +40,20 @@ function Challenges() {
     );
   }
   return (
-    <>
+    <div>
       <Navbar />
-      Challenges
+      {challenges.map((challenge) => (
+        <ChallengesCard
+          key={challenge.id}
+          id={challenge.id}
+          type={challenge.data().type}
+          price={challenge.data().price}
+          participant={challenge.data().participants}
+          access={challenge.data().access}
+        />
+      ))}
       <Footer />
-    </>
+    </div>
   );
 }
 
