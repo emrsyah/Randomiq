@@ -8,6 +8,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { firestoreDb } from "../firebase";
 import ChallengesCard from "../components/ChallengesCard";
 import emptyImage1 from "../assets/empty1.svg";
+import emptyImage2 from "../assets/empty2.svg";
 import { useNavigate } from "react-router-dom";
 
 function Challenges() {
@@ -108,7 +109,37 @@ function Challenges() {
                 />
               ))}
             </Tab.Panel>
-            <Tab.Panel>Content 2</Tab.Panel>
+            <Tab.Panel>
+              {challenges.length === 0 && (
+                <div className="flex justify-center gap-4 flex-col items-center my-3">
+                  <img src={emptyImage2} alt="" />
+                  <div>
+                    <h5 className="text-2xl font-medium text-center">
+                      Finished Your Challenges and Share The Moments
+                    </h5>
+                    <p className="opacity-70 text-center">
+                    There's no Finished Challenges
+                    </p>
+                  </div>
+                  <button
+                    className="text-lg font-medium bg-[#ffc300] py-2 px-8 mt-5 rounded-sm hover:bg-yellow-500"
+                    onClick={() => navigate("/")}
+                  >
+                    Randomize
+                  </button>
+                </div>
+              )}
+              {/* {challenges.map((challenge) => (
+                <ChallengesCard
+                  key={challenge.id}
+                  id={challenge.id}
+                  type={challenge.data().type}
+                  price={challenge.data().price}
+                  participant={challenge.data().participants}
+                  access={challenge.data().access}
+                />
+              ))} */}
+            </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>
       </div>
