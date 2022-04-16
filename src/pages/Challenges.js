@@ -52,7 +52,7 @@ function Challenges() {
   return (
     <div>
       <Navbar />
-      <Modal />
+      <Modal user={user} />
       <div className="mx-28 my-10">
         <Tab.Group>
           <Tab.List className="flex gap-3 border-b-[1px] border-gray-600">
