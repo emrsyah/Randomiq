@@ -15,6 +15,7 @@ function Challenges() {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth0();
   const [challenges, setChallenges] = useState([]);
+  const [finishedChallenges, setFinishedChallenges] = useState([]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -106,11 +107,12 @@ function Challenges() {
                   price={challenge.data().price}
                   participant={challenge.data().participants}
                   access={challenge.data().access}
+                  activity={challenge.data().activity}
                 />
               ))}
             </Tab.Panel>
             <Tab.Panel>
-              {challenges.length === 0 && (
+              {finishedChallenges.length === 0 && (
                 <div className="flex justify-center gap-4 flex-col items-center my-3">
                   <img src={emptyImage2} alt="" />
                   <div>

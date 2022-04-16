@@ -5,6 +5,31 @@ body{
 }
 /*  */
 
+.b-bawah{
+  opacity: 0.01;
+}
+
+.b-ijo:hover{
+  color: green;
+  opacity: 1;
+}
+
+.b-ijo:hover svg{
+  background: #15a00030;
+}
+.b-merah:hover svg{
+  background: #db3f4730;
+}
+
+.b-merah:hover{
+  color: red;
+  opacity: 1;
+}
+
+.p-atas:hover .b-bawah{
+  opacity: 0.6;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
