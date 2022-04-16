@@ -14,7 +14,7 @@ function ChallengesCard({ type, id, price, participant, access, activity }) {
   }
 
   const finishChallengesHandler = () =>{
-    setSelectedChallenge({activity:activity, type: type, participant: participant})
+    setSelectedChallenge({activity:activity, type: type, participant: participant, id:id})
     setModal(true)
   }
 

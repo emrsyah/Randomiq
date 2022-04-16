@@ -3,9 +3,8 @@ import { Dialog } from "@headlessui/react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Icon } from "@iconify/react";
 import { challengeSelectedState, modalState } from "../atoms/modalAtom";
-import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
-import { firestoreDb, storage } from "../firebase";
-import {ref, uploadString} from 'firebase/storage'
+import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { firestoreDb } from "../firebase";
 import { setFirestoreStorage } from "../helpers/firebaseStorage";
 
 function Modal({user}) {
@@ -18,7 +17,10 @@ function Modal({user}) {
 
   const postChallengeHandler = async (ev) =>{
       ev.preventDefault();
-      if(loading) return
+      if(loading){
+        console.log('re')
+        return
+      }
       setLoading(true)
       // * Upload Doc First to get unique id for image name
       const docRef = await addDoc(collection(firestoreDb, 'finished-challenges'),{
@@ -34,6 +36,7 @@ function Modal({user}) {
       await updateDoc(doc(firestoreDb, 'finished-challenges', docRef.id),{
         image: imgUrl
       })
+      await deleteDoc(doc(firestoreDb, 'challenges', selectedChallenge.id))
       setIsOpen(false)
       setLoading(false)
       setSelectedImg(false)
