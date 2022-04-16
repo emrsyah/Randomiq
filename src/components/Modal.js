@@ -7,7 +7,7 @@ import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "
 import { firestoreDb } from "../firebase";
 import { setFirestoreStorage } from "../helpers/firebaseStorage";
 
-function Modal({user}) {
+function Modal({user, id}) {
   const [isOpen, setIsOpen] = useRecoilState(modalState);
   const selectedChallenge = useRecoilValue(challengeSelectedState)
   const [selectedImg, setSelectedImg] = useState(null)
@@ -17,13 +17,11 @@ function Modal({user}) {
 
   const postChallengeHandler = async (ev) =>{
       ev.preventDefault();
-      if(loading){
-        console.log('re')
-        return
-      }
+      if(loading) return
       setLoading(true)
       // * Upload Doc First to get unique id for image name
       const docRef = await addDoc(collection(firestoreDb, 'finished-challenges'),{
+        userId: id,
         username: user.nickname,
         caption: captionRef.current.value,
         profileImg: user.picture,

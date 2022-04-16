@@ -52,7 +52,7 @@ function Challenges() {
   return (
     <div>
       <Navbar />
-      <Modal user={user} />
+      <Modal user={user} id={user.sub.substring(user.sub.indexOf("|") + 1)} />
       <div className="mx-28 my-10">
         <Tab.Group>
           <Tab.List className="flex gap-3 border-b-[1px] border-gray-600">
