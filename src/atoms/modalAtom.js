@@ -2,10 +2,10 @@ import { atom } from "recoil";
 
 export const modalState = atom({
     key: "modalState",
-    default: true,
+    default: false,
 })
 
-export const challengeSelected = atom({
-    key: "challengeSelected",
+export const challengeSelectedState = atom({
+    key: "challengeSelectedState",
     default: {}
 })
