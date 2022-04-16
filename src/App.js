@@ -6,6 +6,7 @@ import { RecoilRoot } from "recoil";
 import Challenges from "./pages/Challenges";
 import { ToastContainer } from "react-toastify";
 import loading from "./assets/loading.svg";
+import Modal from "./components/Modal";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/challenges" element={<Challenges />} />
+          <Route path="/modal" element={<Modal />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

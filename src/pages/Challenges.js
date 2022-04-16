@@ -10,10 +10,12 @@ import ChallengesCard from "../components/ChallengesCard";
 import emptyImage1 from "../assets/empty1.svg";
 import emptyImage2 from "../assets/empty2.svg";
 import { useNavigate } from "react-router-dom";
+import Modal from "../components/Modal";
 
 function Challenges() {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth0();
+  const [loading, setLoading] = useState(true);
   const [challenges, setChallenges] = useState([]);
   const [finishedChallenges, setFinishedChallenges] = useState([]);
 
@@ -29,9 +31,11 @@ function Challenges() {
           setChallenges(snapshot.docs);
         }
       );
+      setLoading(false)
       return unsubscribe;
     }
   }, []);
+
 
   if (!isAuthenticated) {
     return (
@@ -48,6 +52,7 @@ function Challenges() {
   return (
     <div>
       <Navbar />
+      <Modal />
       <div className="mx-28 my-10">
         <Tab.Group>
           <Tab.List className="flex gap-3 border-b-[1px] border-gray-600">
@@ -80,7 +85,10 @@ function Challenges() {
           </Tab.List>
           <Tab.Panels>
             <Tab.Panel>
-              {challenges.length === 0 && (
+              {loading &&(
+                <div>Loading...</div>
+              )}
+              {challenges.length === 0 && !loading && (
                 <div className="flex justify-center gap-4 flex-col items-center my-3">
                   <img src={emptyImage1} alt="" />
                   <div>

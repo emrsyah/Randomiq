@@ -30,6 +30,13 @@ body{
   opacity: 0.6;
 }
 
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
