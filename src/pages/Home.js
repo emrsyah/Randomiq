@@ -67,7 +67,7 @@ function Home() {
   const getRandomActivity = () => {
     setLoading(true);
     axios
-      .get("http://www.boredapi.com/api/activity", {
+      .get("https://cors-everywhere.herokuapp.com/http://www.boredapi.com/api/activity", {
         params: {
           type: typeValue.value,
           minprice: priceValue.value[0],
