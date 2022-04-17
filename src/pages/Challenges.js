@@ -11,6 +11,7 @@ import emptyImage1 from "../assets/empty1.svg";
 import emptyImage2 from "../assets/empty2.svg";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
+import FinishedChallengePost from "../components/FinishedChallengePost";
 
 function Challenges() {
   const navigate = useNavigate();
@@ -18,10 +19,10 @@ function Challenges() {
   const [loading, setLoading] = useState(true);
   const [challenges, setChallenges] = useState([]);
   const [finishedChallenges, setFinishedChallenges] = useState([]);
+  const userId = user.sub.substring(user.sub.indexOf("|") + 1);
 
   useEffect(() => {
     if (isAuthenticated) {
-      const userId = user.sub.substring(user.sub.indexOf("|") + 1);
       const unsubscribe = onSnapshot(
         query(
           collection(firestoreDb, "challenges"),
@@ -31,11 +32,26 @@ function Challenges() {
           setChallenges(snapshot.docs);
         }
       );
-      setLoading(false)
+      setLoading(false);
       return unsubscribe;
     }
   }, []);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      const unsubscribe = onSnapshot(
+        query(
+          collection(firestoreDb, "finished-challenges"),
+          where("userId", "==", userId)
+        ),
+        (snapshot) => {
+          setFinishedChallenges(snapshot.docs);
+        }
+      );
+      setLoading(false);
+      return unsubscribe;
+    }
+  }, []);
 
   if (!isAuthenticated) {
     return (
@@ -50,10 +66,10 @@ function Challenges() {
     );
   }
   return (
-    <div>
-      <Navbar />
+    <div className="flex flex-col min-h-screen">
+      <Navbar className="flex-grow-0" />
       <Modal user={user} id={user.sub.substring(user.sub.indexOf("|") + 1)} />
-      <div className="mx-28 my-10">
+      <div className="mx-28 my-10 flex-grow">
         <Tab.Group>
           <Tab.List className="flex gap-3 border-b-[1px] border-gray-600">
             <Tab as={Fragment}>
@@ -85,9 +101,7 @@ function Challenges() {
           </Tab.List>
           <Tab.Panels>
             <Tab.Panel>
-              {loading &&(
-                <div>Loading...</div>
-              )}
+              {loading && <div>Loading...</div>}
               {challenges.length === 0 && !loading && (
                 <div className="flex justify-center gap-4 flex-col items-center my-3">
                   <img src={emptyImage1} alt="" />
@@ -120,7 +134,8 @@ function Challenges() {
               ))}
             </Tab.Panel>
             <Tab.Panel>
-              {finishedChallenges.length === 0 && (
+              {loading && <div>Loading...</div>}
+              {finishedChallenges.length === 0 && !loading && (
                 <div className="flex justify-center gap-4 flex-col items-center my-3">
                   <img src={emptyImage2} alt="" />
                   <div>
@@ -128,7 +143,7 @@ function Challenges() {
                       Finished Your Challenges and Share The Moments
                     </h5>
                     <p className="opacity-70 text-center">
-                    There's no Finished Challenges
+                      There's no Finished Challenges
                     </p>
                   </div>
                   <button
@@ -139,21 +154,30 @@ function Challenges() {
                   </button>
                 </div>
               )}
-              {/* {challenges.map((challenge) => (
-                <ChallengesCard
-                  key={challenge.id}
-                  id={challenge.id}
-                  type={challenge.data().type}
-                  price={challenge.data().price}
-                  participant={challenge.data().participants}
-                  access={challenge.data().access}
+              <div className="grid grid-cols-3 gap-3 mt-6 ">
+              {finishedChallenges.map((finishChallenge) => (
+                <FinishedChallengePost
+                  key={finishChallenge.id}
+                  id={finishChallenge.id}
+                  type={finishChallenge.data().type}
+                  username={finishChallenge.data().username}
+                  userId={finishChallenge.data().userId}
+                  profileImg={finishChallenge.data().profileImg}
+                  image={finishChallenge.data().image}
+                  participant={finishChallenge.data().participant}
+                  likes={finishChallenge.data().likes}
+                  activity={finishChallenge.data().activity}
+                  timestamp={finishChallenge.data().timestamp}
+                  caption={finishChallenge.data().caption}
+                  userNow={userId}
                 />
-              ))} */}
+              ))}
+              </div>
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>
       </div>
-      <Footer />
+      <Footer className="flex-grow-0" />
     </div>
   );
 }

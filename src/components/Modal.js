@@ -6,6 +6,7 @@ import { challengeSelectedState, modalState } from "../atoms/modalAtom";
 import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { firestoreDb } from "../firebase";
 import { setFirestoreStorage } from "../helpers/firebaseStorage";
+import { toast } from "react-toastify";
 
 function Modal({user, id}) {
   const [isOpen, setIsOpen] = useRecoilState(modalState);
@@ -29,6 +30,7 @@ function Modal({user, id}) {
         activity: selectedChallenge.activity,
         type: selectedChallenge.type,
         participant: selectedChallenge.participant,
+        likes: 0,
       });
       const imgUrl = await setFirestoreStorage(selectedImg, docRef.id)
       await updateDoc(doc(firestoreDb, 'finished-challenges', docRef.id),{
@@ -38,6 +40,7 @@ function Modal({user, id}) {
       setIsOpen(false)
       setLoading(false)
       setSelectedImg(false)
+      toast.success('Challenges Finished')
   }
 
   const modalCloseHandler = () =>{
@@ -70,10 +73,10 @@ function Modal({user, id}) {
               Your Picture On This Challenges
               <span className="text-red-600">*</span>
             </p>
-            <input type="file" name="" id="" ref={fileInputRef} required hidden onChange={(ev)=>setSelectedImg(ev.target.files[0])} accept="image/*" />
+            <input type="file" name="" id="" ref={fileInputRef} disabled={loading} required hidden onChange={(ev)=>setSelectedImg(ev.target.files[0])} accept="image/*" />
             <div
               onClick={() => fileInputRef.current.click()}
-              className="cursor-pointer w-full mt-1 bg-yellow-200 hover:bg-yellow-300  border-[#ffc300] border-2 text-center rounded-md p-1 text-yellow-700 text-sm"
+              className={`cursor-pointer w-full mt-1 bg-yellow-200 hover:bg-yellow-300  border-[#ffc300] border-2 text-center rounded-md p-1 text-yellow-700 text-sm ${loading && "opacity-75"} `}
             >
               {selectedImg? selectedImg.name : "Select Image"}
             </div>
@@ -84,13 +87,14 @@ function Modal({user, id}) {
               type="text"
               name=""
               id=""
-              className="w-full p-3 mt-1 border-[1px] border-gray-300 rounded-sm focus:outline-none focus:border-[#FFC300] focus:border-[1.5px]"
+              className={`w-full p-3 mt-1 border-[1px] border-gray-300 rounded-sm focus:outline-none focus:border-[#FFC300] focus:border-[1.5px] ${loading && "opacity-75"} `}
               placeholder="Tell us how it goes (max 50 char)"
               maxLength={50}
               required
+              disabled={loading}
               ref={captionRef}
             />
-            <button type="submit" className=" mt-8 py-2 px-4 bg-[#ffc300] hover:bg-yellow-500 rounded-md font-medium">
+            <button type="submit" className={`mt-8 py-2 px-4 bg-[#ffc300] hover:bg-yellow-500 rounded-md font-medium ${loading && 'opacity-60'}`} disabled={loading} >
                 Finish and Post
             </button>
           </form>
