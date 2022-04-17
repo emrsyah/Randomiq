@@ -155,7 +155,7 @@ function Challenges() {
                   </button>
                 </div>
               )}
-              <div className="grid grid-cols-3 gap-3 mt-6 ">
+              <div className="grid grid-cols-3 gap-x-3 gap-y-6 gap mt-6 ">
               {finishedChallenges.map((finishChallenge) => (
                 <FinishedChallengePost
                   key={finishChallenge.id}
