@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import waiting from "../assets/waiting.svg";
 import { Tab } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
-import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { firestoreDb } from "../firebase";
 import ChallengesCard from "../components/ChallengesCard";
 import emptyImage1 from "../assets/empty1.svg";
