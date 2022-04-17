@@ -4,13 +4,16 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { firestoreDb } from "../firebase";
 import { useSetRecoilState } from "recoil";
 import { challengeSelectedState, modalState } from "../atoms/modalAtom";
+import { toast } from "react-toastify";
 
 function ChallengesCard({ type, id, price, participant, access, activity }) {
   const setModal = useSetRecoilState(modalState)
   const setSelectedChallenge = useSetRecoilState(challengeSelectedState)
   
+  // TODO Add Toast Notification after delete is success
   const deleteChallengesHandler = async () =>{
     await deleteDoc(doc(firestoreDb, "challenges", id))
+    toast.info('Challenges Deleted')
   }
 
   const finishChallengesHandler = () =>{
