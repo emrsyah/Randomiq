@@ -36,9 +36,9 @@ function Navbar() {
           your challenges
         </a>
         <a
-          href="/"
+          href="/explores"
           className={`navlink ${
-            location.pathname === "/explore" && "font-medium opacity-100"
+            location.pathname === "/explores" && "font-medium opacity-100"
           } `}
         >
           explores

@@ -19,7 +19,7 @@ function Challenges() {
   const [loading, setLoading] = useState(true);
   const [challenges, setChallenges] = useState([]);
   const [finishedChallenges, setFinishedChallenges] = useState([]);
-  const userId = user.sub.substring(user.sub.indexOf("|") + 1);
+  const userId = user?.sub.substring(user.sub.indexOf("|") + 1);
 
   useEffect(() => {
     if (isAuthenticated) {

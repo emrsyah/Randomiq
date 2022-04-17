@@ -6,10 +6,10 @@ import { RecoilRoot } from "recoil";
 import Challenges from "./pages/Challenges";
 import { ToastContainer } from "react-toastify";
 import logo from "./assets/randomiq-logo-top.svg";
-import Modal from "./components/Modal";
 import lottiejson from './assets/99853-spinner.json'
 import { useEffect } from "react";
 import Lottie from "lottie-web";
+import Explores from "./pages/Explores";
 
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/challenges" element={<Challenges />} />
-          <Route path="/modal" element={<Modal />} />
+          <Route path="/explores" element={<Explores />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
