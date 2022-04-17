@@ -14,3 +14,9 @@ Having a bored days?, get some random challenges right now. Website: https://ran
 ## How To Run ##
 1. Go to [randomiq](https://randomiq.vercel.app/)
 2. Login so you can accept the challenge, get your first random challenge and share the moment.
+
+## Some Preview ##
+![randomiqweb1](https://user-images.githubusercontent.com/70552996/163720712-e1a9de8b-8ea6-4cc8-9d6c-78bb3e49dd6f.jpeg)
+![randomiqweb2](https://user-images.githubusercontent.com/70552996/163720718-f7ef51a4-7a7c-4225-97a7-702d012ee57c.jpeg)
+![randomiqweb3](https://user-images.githubusercontent.com/70552996/163720721-48ac952e-1ea3-4b04-8b18-ffcb507a2deb.jpeg)
+![randomiqweb4](https://user-images.githubusercontent.com/70552996/163720725-a3c77c7b-4934-4cdb-a259-7e04eecd86ee.jpeg)
