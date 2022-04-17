@@ -29,7 +29,7 @@ function ChallengesCard({ type, id, price, participant, access, activity }) {
           {type} - {price} price - {participant} people - {access} accessibility
         </p>
       </div>
-      <div className="flex gap-2  cursor-pointer">
+      <div className="flex gap-5  cursor-pointer">
         <button className="p-1 b-bawah b-ijo max-h-max" onClick={finishChallengesHandler}>
           <Icon icon="bi:check-square" width="24" />
         </button>

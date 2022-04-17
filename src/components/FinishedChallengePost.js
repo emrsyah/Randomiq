@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Icon } from "@iconify/react";
 import Moment from "react-moment";
 import { deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
@@ -89,6 +89,7 @@ function FinishedChallengePost({
         src={image}
         className="object-cover h-[240px] w-[360px] rounded-lg my-3"
         alt="challengesimg"
+        loading={lazy}
       />
 
       {/* Bottom 1 */}
@@ -104,7 +105,7 @@ function FinishedChallengePost({
           <Icon
             icon="ant-design:heart-filled"
             width="22"
-            className={`cursor-pointer hover:scale-105 ${
+            className={`cursor-pointer hover:scale-110 ${
               likes > 0 ? "text-red-500" : "text-gray-400"
             }`}
             onClick={addLikeHandler}
