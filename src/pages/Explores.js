@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import { firestoreDb } from "../firebase";
 
 function Explores() {
-  const {user} = useAuth0()
+  const { user } = useAuth0();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {

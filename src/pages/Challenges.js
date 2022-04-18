@@ -53,7 +53,6 @@ function Challenges() {
     }
   }, []);
 
-
   if (!isAuthenticated) {
     return (
       <div className="h-[100vh] flex flex-col justify-between ">
@@ -156,23 +155,23 @@ function Challenges() {
                 </div>
               )}
               <div className="grid grid-cols-3 gap-x-3 gap-y-6 gap mt-6 ">
-              {finishedChallenges.map((finishChallenge) => (
-                <FinishedChallengePost
-                  key={finishChallenge.id}
-                  id={finishChallenge.id}
-                  type={finishChallenge.data().type}
-                  username={finishChallenge.data().username}
-                  userId={finishChallenge.data().userId}
-                  profileImg={finishChallenge.data().profileImg}
-                  image={finishChallenge.data().image}
-                  participant={finishChallenge.data().participant}
-                  likes={finishChallenge.data().likes}
-                  activity={finishChallenge.data().activity}
-                  timestamp={finishChallenge.data().timestamp}
-                  caption={finishChallenge.data().caption}
-                  userNow={userId}
-                />
-              ))}
+                {finishedChallenges.map((finishChallenge) => (
+                  <FinishedChallengePost
+                    key={finishChallenge.id}
+                    id={finishChallenge.id}
+                    type={finishChallenge.data().type}
+                    username={finishChallenge.data().username}
+                    userId={finishChallenge.data().userId}
+                    profileImg={finishChallenge.data().profileImg}
+                    image={finishChallenge.data().image}
+                    participant={finishChallenge.data().participant}
+                    likes={finishChallenge.data().likes}
+                    activity={finishChallenge.data().activity}
+                    timestamp={finishChallenge.data().timestamp}
+                    caption={finishChallenge.data().caption}
+                    userNow={userId}
+                  />
+                ))}
               </div>
             </Tab.Panel>
           </Tab.Panels>

@@ -47,10 +47,10 @@ function Home() {
   const addChallenges = async () => {
     setLoading(true);
     if (!isAuthenticated) {
-      toast.warn('To save challenges you must logged in first')
+      toast.warn("To save challenges you must logged in first");
     } else {
       const userId = user.sub.substring(user.sub.indexOf("|") + 1);
-      await addDoc(collection(firestoreDb, "challenges"),{
+      await addDoc(collection(firestoreDb, "challenges"), {
         userId: userId,
         activity: randomAct.activity,
         type: randomAct.type,
@@ -67,20 +67,23 @@ function Home() {
   const getRandomActivity = () => {
     setLoading(true);
     axios
-      .get("https://cors-everywhere.herokuapp.com/http://www.boredapi.com/api/activity", {
-        params: {
-          type: typeValue.value,
-          minprice: priceValue.value[0],
-          maxprice: priceValue.value[1],
-          participants: participantValue.value,
-          minaccessibility: accessValue.value[0],
-          maxaccessibility: accessValue.value[1],
-        },
-      })
+      .get(
+        "https://cors-everywhere.herokuapp.com/http://www.boredapi.com/api/activity",
+        {
+          params: {
+            type: typeValue.value,
+            minprice: priceValue.value[0],
+            maxprice: priceValue.value[1],
+            participants: participantValue.value,
+            minaccessibility: accessValue.value[0],
+            maxaccessibility: accessValue.value[1],
+          },
+        }
+      )
       .then(function (response) {
-        if(response.data.error){
-          toast.error(response.data.error)
-        }else{
+        if (response.data.error) {
+          toast.error(response.data.error);
+        } else {
           const transformedData = transformAttribute(response.data);
           setRandomAct(transformedData);
         }
@@ -117,14 +120,18 @@ function Home() {
       </div>
       <div className="flex items-center mx-16 gap-4">
         <button
-          className={`text-xl font-medium py-4 px-8 border-2 border-[#FFC300] rounded-lg bg-white hover:bg-yellow-100 ${loading && "opacity-60"} `}
+          className={`text-xl font-medium py-4 px-8 border-2 border-[#FFC300] rounded-lg bg-white hover:bg-yellow-100 ${
+            loading && "opacity-60"
+          } `}
           onClick={addChallenges}
           disabled={loading}
         >
           Accept Challenge
         </button>
         <button
-          className={`text-white p-4 bg-[#FFC300] rounded-lg hover:bg-yellow-500 cursor-pointer ${loading && "opacity-60"} `}
+          className={`text-white p-4 bg-[#FFC300] rounded-lg hover:bg-yellow-500 cursor-pointer ${
+            loading && "opacity-60"
+          } `}
           onClick={getRandomActivity}
           disabled={loading}
         >
