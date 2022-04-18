@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.9.0",
+    "@builder.io/partytown": "^0.5.2",
     "@headlessui/react": "^1.5.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
