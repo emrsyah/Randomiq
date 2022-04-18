@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
-import FilterContainer from "../components/FilterContainer";
+import FilterContainer from "../components/filter/FilterContainer";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import transformAttribute from "../helpers/transformAttribute";

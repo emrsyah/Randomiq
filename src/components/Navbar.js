@@ -2,8 +2,8 @@ import React from "react";
 import logo from "../assets/randomiq-logo-top.svg";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+import LoginButton from "./button/LoginButton";
+import LogoutButton from "./button/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Navbar() {
