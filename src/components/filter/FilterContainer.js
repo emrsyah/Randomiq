@@ -9,7 +9,7 @@ import {
   priceState,
   typeData,
   typeState,
-} from "../atoms/filterAtom";
+} from "../../atoms/filterAtom";
 import Filter from "./Filter";
 
 // TODO Tambahin value di tiap datanya kek param buat fetch api nya nanti
