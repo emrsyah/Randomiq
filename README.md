@@ -4,7 +4,9 @@
 Having a bored days?, get some random challenges right now. Website: https://randomiq.vercel.app/
 
 ## Update! ##
-This project make to top 5 in the hackhaton, Thanks to Tim and his team!
+This project get to the top 5 in the hackhaton (still can't believe made this far lol), anyway Thanks to Tim and his team!
+
+His video: [Youtube](https://youtu.be/svJ0FtfyfRo)
 
 ## Features ##
 <ul>
